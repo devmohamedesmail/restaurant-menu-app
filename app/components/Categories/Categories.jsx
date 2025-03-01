@@ -14,7 +14,6 @@ export default function Categories() {
     try {
       const response = await axios.get('/api/categories');
       setCategories(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -34,7 +33,7 @@ useEffect(() => {
        <div className='grid grid-cols-4  gap-4'>
 
         {categories.map((category) => (
-          <CategoryItem key={category._id} title={category.title} />
+          <CategoryItem key={category._id} title={category.title} image={category.image} />
         ))}
        
        
