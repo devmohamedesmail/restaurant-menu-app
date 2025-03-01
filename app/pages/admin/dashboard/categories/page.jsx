@@ -71,14 +71,18 @@ export default function page() {
 
 
     const handleEditCategory = async (id) =>{
-        
+        console.log(selectedCategory)
         try {
             const response = await fetch(`/api/categories/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ title: selectedCategory }),
+                body: JSON.stringify({
+                    id: selectedCategory._id,
+                    title: selectedCategory.title,
+                    image: selectedCategory.image, // Send image path if no new upload
+                }),
             })
         } catch (error) {
             

@@ -21,12 +21,22 @@ export async function DELETE(request, { params }) {
 // edit category info
 export async function PUT(request, { params }) {
    try {
-      await connectDB()
-      const id = params.id;
-      const formData = await request.formData();
-      return NextResponse.json({ message: "Category updated successfully", id });
-     
+       await connectDB();
+       const id = params.id;
+       const { title, image } = await request.json(); // Expecting JSON data
+
+       const updatedCategory = await Category.findByIdAndUpdate(
+           id,
+           { title, image }, // Update both title and image
+           { new: true }
+       );
+
+       if (!updatedCategory) {
+           return NextResponse.json({ message: "Category not found" }, { status: 404 });
+       }
+
+       return NextResponse.json({ message: "Category updated successfully", updatedCategory }, { status: 200 });
    } catch (error) {
-      return NextResponse.json({ message: "Category updated unsuccessfully", error });
+       return NextResponse.json({ message: "Error updating category", error: error.message }, { status: 500 });
    }
 }
