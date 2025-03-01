@@ -6,7 +6,11 @@ const mealSchema = new Schema({
         type:String,
         required:true
     },
-    name: {
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
         type: String,
         required: true
     },

@@ -1,48 +1,25 @@
 'use client'
 import CustomInput from '@/app/customcomponents/CustomInput'
-import React, { useState, useEffect,useRef } from 'react'
-import axios from 'axios'
+import React, { useState,useRef,useContext } from 'react'
 import CustomButton from '@/app/customcomponents/CustomButton'
 import AdminSidebar from '@/app/components/AdminSidebar/AdminSidebar'
 import CustomImagePicker from '@/app/customcomponents/CustomImagePicker'
 import HeaderAdmin from '@/app/components/HeaderAdmin/HeaderAdmin'
-import ClipLoader from "react-spinners/ClipLoader";
 import CustomSpinner from '@/app/customcomponents/CustomSpinner'
 import CustomDeleteBtn from '@/app/customcomponents/CustomDeleteBtn'
+import { DataContext } from '@/app/context/DataProvider'
+import CustomEditBtn from '@/app/customcomponents/CustomEditBtn'
 
 export default function page() {
     const [title, setTitle] = useState('')
     const [image, setImage] = useState('')
-    const [categories, setCategories] = useState([])
     const [loading, setLoading] = useState(false)
     const modalRef = useRef(null);
+    const{categories,fetchCategories}=useContext(DataContext)
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const modalRefEdit = useRef(null);
 
-
-    const fetchCategories = async () => {
-        try {
-
-            const response = await axios.get('/api/categories');
-            setCategories(response.data);
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-
-
-    useEffect(() => {
-        fetchCategories();
-    }, []);
-
-
-
-
-
-
-
-
-
+   
 
     const handleSubmit = async () => {
 
@@ -92,6 +69,23 @@ export default function page() {
         }
     };
 
+
+    const handleEditCategory = async (id) =>{
+        
+        try {
+            const response = await fetch(`/api/categories/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: selectedCategory }),
+            })
+        } catch (error) {
+            
+        }
+    }
+
+
     return (
         <div>
 
@@ -110,22 +104,22 @@ export default function page() {
                         <hr />
                         <h4 className='text-white text-center font-bold my-4'>All Categories</h4>
 
-
-
-
-
-
                         <div className='grid grid-cols-3 gap-5'>
                             {categories.map((category) => (
                                 <div key={category._id} className="mb-4 bg-white rounded-2xl overflow-hidden">
                                     <div className="flex flex-col items-center gap-2">
                                         <img src={category.image} alt={category.title} className="w-full" />
                                         <p className="text-black font-bold">{category.title}</p>
+                                        <p className="text-black font-bold">{category._id}</p>
                                     </div>
-                                    <div className='flex justify-between gap-2 my-2'>
-
+                                    <div className='flex justify-between gap-2 my-2 px-2'>
+                                
                                         <CustomDeleteBtn onClick={() => handleDelete(category._id)} />
-                                        <button className='flex-1 rounded-xl py-2 text-white mx-1 bg-green-600'>Edit</button>
+                                        <CustomEditBtn onClick={() => {
+                                            modalRefEdit.current?.showModal()
+                                            setSelectedCategory(category)
+                                        }} />    
+                                        
                                     </div>
                                 </div>
                             ))}
@@ -142,6 +136,25 @@ export default function page() {
             </div>
 
 
+
+
+
+            <dialog ref={modalRefEdit} className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Edit Category</h3>
+                    
+                    <div className="modal-action ">
+                        <form method="dialog" className=' flex flex-col w-full'>
+                           
+                            <CustomInput value={selectedCategory?.title} onChange={(e) => setSelectedCategory({ ...selectedCategory, title: e.target.value })}  />
+                            <CustomImagePicker onChange={(e) => setSelectedCategory({ ...selectedCategory, image: e.target.files[0] })} />
+                            <CustomButton title="Update" onClick={() => handleEditCategory(selectedCategory._id) } />   
+                            <button className="btn btn-error my-1">Close</button>
+                        </form>
+                       
+                    </div>
+                </div>
+            </dialog>
 
 
 

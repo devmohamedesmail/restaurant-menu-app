@@ -1,43 +1,42 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CategoryItem from './CategoryItem'
 import axios from 'axios'
+import CustomSpinner from '@/app/customcomponents/CustomSpinner'
+import { DataContext } from '@/app/context/DataProvider'
 
 export default function Categories() {
 
 
 
-  const [categories,setCategories] = useState([])
+ // const [categories, setCategories] = useState([])
+      const {categories}=useContext(DataContext)
 
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get('/api/categories');
-      setCategories(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
 
 
 
-useEffect(() => {
-  fetchCategories();
-}, []);
 
 
 
   return (
     <div className='container m-auto px-5 my-10'>
-       <h1 className='text-3xl text-center mb-3 text-white font-bold'>Our Categories 🔥</h1>
-       <div className='grid grid-cols-4  gap-4'>
+      <h1 className='text-3xl text-center text-white font-bold mb-10'>Our Categories 🔥</h1>
+    
 
-        {categories.map((category) => (
-          <CategoryItem key={category._id} title={category.title} image={category.image} />
-        ))}
-       
-       
-       </div>
+
+        {categories && categories.length > 0 ? (
+          <div className='grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6   gap-4'>
+            {categories.map((category) => (
+              <CategoryItem key={category._id} title={category.title} image={category.image} />
+            ))}
+          </div>
+        ) : (
+          <CustomSpinner />
+        )}
+
+
+     
     </div>
   )
 }
