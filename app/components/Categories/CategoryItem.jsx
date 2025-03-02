@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
-export default function CategoryItem({ image, title }) {
+export default function CategoryItem({id ,image, title }) {
     return (
-        <div className='border rounded-2xl overflow-hidden'>
+        <Link href={`/pages/front/categoryMeals/${id}`} className=' rounded-2xl overflow-hidden'>
 
             <div>
                 <img
@@ -12,6 +13,6 @@ export default function CategoryItem({ image, title }) {
             </div>
 
             <p className='text-center text-white text-sm font-bold mt-3'>{title}</p>
-        </div>
+        </Link>
     )
 }

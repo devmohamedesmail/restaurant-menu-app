@@ -1,52 +1,46 @@
 import connectDB from "@/app/config/db";
-import Meal from "@/app/models/Meal";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import { join } from "path";
 import { existsSync, mkdirSync } from "fs";
+import Offer from "@/app/models/Offer";
 
-export async function GET(request) {
+
+export async  function GET(request) {
     try {
         await connectDB();
-        const meals = await Meal.find();
-        return new Response(JSON.stringify(meals));
+        const offers = await Offer.find();
+        return new Response(JSON.stringify(offers));
     } catch (error) {
-
+        console.log(error);
     }
-
 }
 
 
 
 
-
+// post function
 export async function POST(request) {
 
 
     try {
         await connectDB();
         const formData = await request.formData();
-        const categoryId = formData.get('categoryId');
+       
         const title = formData.get('title');
         const price = parseFloat(formData.get('price'));
+        const discount = parseFloat(formData.get('discount'));
         const description = formData.get('description');
         const image = formData.get('image');
 
-
-
-
-
         console.log("Received Data:", {
-            categoryId,
+          
             title,
             price,
+            discount,
             description,
             image,
         });
-
-
-
-
 
 
 
@@ -62,15 +56,15 @@ export async function POST(request) {
         const buffer = Buffer.from(await image.arrayBuffer());
         await writeFile(filePath, buffer);
 
-        const meal = new Meal({
-            categoryid: categoryId,
+        const offer = new Offer({
+            title,
             description,
             price,
-            title,
+            discount,
             image: `/uploads/${fileName}`, // Store the relative path
         });
-        await meal.save();
-        console.log("Meal saved successfully:", meal);
+        await offer.save();
+        console.log("Offer saved successfully:", meal);
         return NextResponse.json({ "message": "Meal added successfully", meal });
     } catch (error) {
         return NextResponse.json({ "message": "Failed to Store Meal", error });

@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const mealSchema = new Schema({
-    categoryid:{
-        type:String,
-        required:true
-    },
+const offerSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -14,14 +10,18 @@ const mealSchema = new Schema({
         type: String,
         required: false
     },
-    price: {
-        type: Number,
-        required: true
-    },
     image: {
         type: String,
         required: true
+    },
+    discount: {
+        type: Number,
+        required: false
+    },
+    price:{
+        type: Number,
+        required: false
     }
 });
 
-module.exports = mongoose.models.Meal || mongoose.model("Meal", mealSchema);
+module.exports = mongoose.models.Offer || mongoose.model("Offer", offerSchema);

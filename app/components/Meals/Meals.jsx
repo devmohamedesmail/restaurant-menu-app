@@ -1,43 +1,85 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MealItem from './MealItem'
-import axios from 'axios'
+
+import { DataContext } from '@/app/context/DataProvider'
+import CustomSpinner from '@/app/customcomponents/CustomSpinner'
+import { add_to_cart } from '@/app/redux/cartReducer'
+import { useDispatch } from 'react-redux'
 
 export default function Meals() {
+  const [quantities, setQuantities] = useState({});
+  const { meals } = useContext(DataContext)
+  const dispatch = useDispatch()
 
-const [meals,setmeals]=useState([])
 
 
 
-const fetchMeals = async () => {
-  try {
-    const response = await axios.get('/api/meals');
-    setmeals(response.data);
-   
-  } catch (error) {
-    console.error(error);
-  }
+
+// *************************************** Quantity Increment start *******************************************
+const handleIncrement = (id) => {
+  
+  setQuantities((prevQuantities) => ({
+    ...prevQuantities,
+    [id]: (prevQuantities[id] || 1) + 1, 
+  }));
 };
 
+// *************************************** Quantity Increment end *******************************************
 
-useEffect(()=>{
-  fetchMeals();
-},[])
+
+// *************************************** Quantity Decrement start *******************************************
+const handleDecrement = (id) => {
+  setQuantities((prevQuantities) => ({
+    ...prevQuantities,
+    [id]: prevQuantities[id] > 1 ? prevQuantities[id] - 1 : 1, // Prevent quantity from going below 1
+  }));
+};
+
+// *************************************** Quantity Decrement end *******************************************
+
+
+
+// *************************************** Add to cart start *******************************************
+const handleAddToCart = (meal) => {
+  dispatch(add_to_cart({
+    id: meal._id,
+    title: meal.title,
+    price: meal.price,
+    quantity: quantities[meal._id] || 1,
+    image: meal.image
+  }));
+};
+
+// *************************************** Add to cart end *******************************************
+
+
 
 
 
 
   return (
-    <div  className='container m-auto px-5 my-10'>
+    <div className='container m-auto px-5 my-10 mb-40'>
 
-        <h1 className='text-3xl text-center mb-3 text-white font-bold'>Our Meals 🔥</h1>
-        <div className='grid grid-cols-2 gap-4'>
-            <MealItem />
-            
-            {meals.map((meal)=>(
-                <MealItem key={meal._id} id={meal._id} title={meal.title} image={meal.image} price={meal.price} />
-            ))}
+      <h1 className='text-2xl text-center text-white font-bold my-10'> Our Meals 🔥</h1>
+
+      {meals && meals.length > 0 ? (
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+          {meals.map((meal) => (
+            <MealItem 
+              key={meal._id} 
+              title={meal.title} 
+              description={meal.description} 
+              image={meal.image} 
+              price={meal.price}
+              quantity={quantities[meal._id] || 1}
+              quantityIncrement={() => handleIncrement(meal._id)}
+              quantityDecrement={() => handleDecrement(meal._id)}
+              addtocart={() => handleAddToCart(meal)}
+              />
+          ))}
         </div>
+      ) : (<CustomSpinner />)}
     </div>
   )
 }
