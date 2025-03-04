@@ -2,6 +2,7 @@
 @plugin "daisyui";
 
 
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;800&display=swap');
 
 body{
   background-image: linear-gradient(to right, #303030 0%, black 100%);
@@ -10,3 +11,10 @@ body{
 }
 
 
+html, body {
+  font-family: 'Cairo', sans-serif !important;
+ 
+}
+.arabic-font{
+  font-family: 'Cairo', sans-serif !important;
+}

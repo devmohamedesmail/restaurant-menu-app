@@ -7,7 +7,7 @@ export default function CategoryItem({id ,image, title }) {
 
             <div>
                 <img
-                    className='rounded-2xl h-30 w-full object-cover'
+                    className='rounded-2xl h-32  w-full object-cover'
                     src={image}
                     alt={title} />
             </div>

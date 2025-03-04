@@ -7,13 +7,13 @@ export default function MealItem({ image, title, price, description ,quantity,ad
     return (
         <div className=''>
             <img
-                className='rounded-2xl h-30 w-full object-cover'
+                className='rounded-2xl h-36 w-full object-cover'
                 src={image}
                 alt={title} />
 
-            <h3 className='text-white text-center font-bold'>{title}</h3>
-            <h3 className='text-white text-center'>{description}</h3>
-            <h3 className=' text-center font-bold text-amber-600'>{price} AED</h3>
+            <h3 className='text-white text-center font-bold mt-2 '>{title}</h3>
+            <h3 className='text-white text-center text-xs mt-2'>{description}</h3>
+            <h3 className=' text-center font-bold text-amber-600 mt-3'>{price} AED</h3>
 
             <div className='flex justify-between items-center'>
                 <div className='flex justify-between items-center flex-1 mr-10 bg-black px-2 py-1 rounded-full  '>

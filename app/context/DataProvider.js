@@ -22,14 +22,17 @@ export const DataProvider = ({ children }) => {
     // *************************************** fetch categories start *******************************************
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('/api/categories',{
+           
+            const response = await fetch('/api/categories', {
+                method: 'GET',
                 headers: {
                     'Cache-Control': 'no-cache',
                     'Pragma': 'no-cache',
                     'Expires': '0',
                 }
-            });
-            setCategories(response.data);
+            })
+            const data = await response.json();
+            setCategories(data);
 
         } catch (error) {
             console.log("Error Fetching Categories", error);
@@ -44,14 +47,17 @@ export const DataProvider = ({ children }) => {
     // *************************************** fetch Meals start *******************************************
     const fetchMeals = async () => {
         try {
-            const response = await axios.get('/api/meals',{
+            
+            const response = await fetch('/api/meals', {
+                method: 'GET',
                 headers: {
                     'Cache-Control': 'no-cache',
                     'Pragma': 'no-cache',
                     'Expires': '0',
                 }
-            });
-            setMeals(response.data);
+            })
+            const data = await response.json();
+            setMeals(data);
         } catch (error) {
             console.log("Error Fetching Meals", error);
         }
@@ -117,7 +123,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider 
             value=
-            {{ categories, fetchCategories, meals, fetchMeals, offers, fetchOffers,tableNo,setTableNo,setting }}>
+            {{ categories, fetchCategories, meals, fetchMeals, offers, fetchOffers,tableNo,setTableNo,setting,fetchSetting }}>
             {children}
         </DataContext.Provider>
     )
