@@ -3,7 +3,15 @@ import Order from "@/app/models/Order";
 import { NextResponse } from "next/server";
 
 
-
+export async function GET(request) {
+    try {
+        await connectDB();
+        const orders = await Order.find();
+        return new Response(JSON.stringify(orders));
+    } catch (error) {
+        
+    }
+}
 
 
 

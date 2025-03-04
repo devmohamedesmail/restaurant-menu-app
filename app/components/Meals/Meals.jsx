@@ -7,11 +7,13 @@ import CustomSpinner from '@/app/customcomponents/CustomSpinner'
 import { add_to_cart } from '@/app/redux/cartReducer'
 import { useDispatch } from 'react-redux'
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { useTranslation } from 'react-i18next'
 
 export default function Meals() {
   const [quantities, setQuantities] = useState({});
   const { meals } = useContext(DataContext)
   const dispatch = useDispatch()
+  const {t}=useTranslation()
 
 
 
@@ -63,7 +65,7 @@ const handleAddToCart = (meal) => {
   return (
     <div className='container m-auto px-5 my-10 mb-40'>
 
-      <h1 className='text-2xl text-center text-white font-bold my-10'> Our Meals 🔥</h1>
+      <h1 className='text-2xl text-center text-white font-bold my-10'> {t('Meals')} 🔥</h1>
 
       {meals && meals.length > 0 ? (
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>

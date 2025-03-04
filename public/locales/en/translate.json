@@ -1,4 +1,22 @@
 {
-    "welcome": "Welcome to my website",
-    "about": "About Us"
+   "Categories":"Categories",
+   "Meals":"Meals",
+   "Offers":"Offers",
+   "Orders":"Orders",
+   "Setting":"Setting",
+   "Home":"Home",
+   "Login":"Login",
+   "Logout":"Logout",
+   "Register":"Register",
+   "About":"About",
+   "Contact":"Contact",
+   "Search":"Search",
+   "Cart":"Cart",
+   "Total":"Total",
+   "Order":"Order",
+   "Order Now":"Order Now",
+   "Order Details":"Order Details",
+   "Order ID":"Order ID"
+  
+  
   }

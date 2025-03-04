@@ -3,13 +3,14 @@ import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { useTranslation } from 'react-i18next';
 
 
 export default function BottomNavbar() {
 
   const cart = useSelector(state => state.cart.meals)
-  const totalPrice = cart.reduce((total, meal) => total + meal.price, 0).toFixed(2);
-
+  const totalPrice = cart.reduce((total, meal) => total + meal.price * meal.quantity, 0).toFixed(2);
+  const {t}=useTranslation();
 
   return (
     <div className='fixed bottom-0 left-0 right-0 flex justify-center items-center bg-black py-2'>
@@ -17,7 +18,7 @@ export default function BottomNavbar() {
 
         <Link href='/pages/front/offers' className='flex flex-col items-center justify-center flex-1'>
           <img src="/images/fire.svg" className='w-8 h-8' alt="" />
-          <h3 className='text-white text-sm'>Offers</h3>
+          <h3 className='text-white text-sm'>{t('Offers')}</h3>
         </Link>
 
 
@@ -39,7 +40,7 @@ export default function BottomNavbar() {
 
         <Link href='/' className='flex flex-col items-center justify-center flex-1'>
           <img src="/images/home.svg" className='w-8 h-8' alt="" />
-          <h3 className='text-white text-sm'>Home</h3>
+          <h3 className='text-white text-sm'>{t('Home')}</h3>
         </Link>
 
 
