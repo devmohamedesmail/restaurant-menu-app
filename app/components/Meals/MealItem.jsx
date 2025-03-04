@@ -1,10 +1,9 @@
 import React from 'react'
-import { MdAddShoppingCart } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import CustomQuantityBtn from '@/app/customcomponents/CustomQuantityBtn';
 
-export default function MealItem({ image, title, price, description ,quantity,addtocart,quantityIncrement,quantityDecrement}) {
+export default function MealItem({ image, title, price, description ,quantity,addtocart,quantityIncrement,quantityDecrement,icon}) {
     return (
         <div className=''>
             <img
@@ -25,7 +24,7 @@ export default function MealItem({ image, title, price, description ,quantity,ad
                 
                 </div>
                 <button className='bg-amber-600 p-3 rounded-full' onClick={addtocart}>
-                    <MdAddShoppingCart color='white' />
+                    {icon}
                 </button>
             </div>
 

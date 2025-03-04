@@ -13,13 +13,21 @@ export const DataProvider = ({ children }) => {
     const [categories, setCategories] = useState([])
     const [meals, setMeals] = useState([])
     const [offers, setOffers] = useState([])
+    const [tableNo, setTableNo] = useState(0);
 
 
+console.log(tableNo);
 
     // *************************************** fetch categories start *******************************************
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('/api/categories');
+            const response = await axios.get('/api/categories',{
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                }
+            });
             setCategories(response.data);
 
         } catch (error) {
@@ -35,7 +43,13 @@ export const DataProvider = ({ children }) => {
     // *************************************** fetch Meals start *******************************************
     const fetchMeals = async () => {
         try {
-            const response = await axios.get('/api/meals');
+            const response = await axios.get('/api/meals',{
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                }
+            });
             setMeals(response.data);
         } catch (error) {
             console.log("Error Fetching Meals", error);
@@ -49,7 +63,13 @@ export const DataProvider = ({ children }) => {
     // *************************************** fetch offers start *******************************************
     const fetchOffers = async () => {
         try {
-            const response = await axios.get('/api/offers');
+            const response = await axios.get('/api/offers',{
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                }
+            });
             setMeals(response.data);
         } catch (error) {
             console.log("Error Fetching offers", error);
@@ -74,6 +94,10 @@ export const DataProvider = ({ children }) => {
 
 
     return (
-        <DataContext.Provider value={{ categories, fetchCategories, meals, fetchMeals, offers, fetchOffers }}>{children}</DataContext.Provider>
+        <DataContext.Provider 
+            value=
+            {{ categories, fetchCategories, meals, fetchMeals, offers, fetchOffers,tableNo,setTableNo }}>
+            {children}
+        </DataContext.Provider>
     )
 };

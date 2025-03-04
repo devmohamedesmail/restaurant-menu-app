@@ -6,6 +6,7 @@ import { DataContext } from '@/app/context/DataProvider'
 import CustomSpinner from '@/app/customcomponents/CustomSpinner'
 import { add_to_cart } from '@/app/redux/cartReducer'
 import { useDispatch } from 'react-redux'
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 export default function Meals() {
   const [quantities, setQuantities] = useState({});
@@ -46,6 +47,7 @@ const handleAddToCart = (meal) => {
     id: meal._id,
     title: meal.title,
     price: meal.price,
+    description: meal.description,
     quantity: quantities[meal._id] || 1,
     image: meal.image
   }));
@@ -76,6 +78,7 @@ const handleAddToCart = (meal) => {
               quantityIncrement={() => handleIncrement(meal._id)}
               quantityDecrement={() => handleDecrement(meal._id)}
               addtocart={() => handleAddToCart(meal)}
+              icon={<MdOutlineAddShoppingCart />}
               />
           ))}
         </div>

@@ -71,7 +71,7 @@ export default function page() {
 
 
     const handleEditCategory = async (id) =>{
-        console.log(selectedCategory)
+        
         try {
             const response = await fetch(`/api/categories/${id}`, {
                 method: 'PUT',
@@ -85,7 +85,7 @@ export default function page() {
                 }),
             })
         } catch (error) {
-            
+          console.log(error)  
         }
     }
 
@@ -114,7 +114,7 @@ export default function page() {
                                     <div className="flex flex-col items-center gap-2">
                                         <img src={category.image} alt={category.title} className="w-full" />
                                         <p className="text-black font-bold">{category.title}</p>
-                                        <p className="text-black font-bold">{category._id}</p>
+                                        
                                     </div>
                                     <div className='flex justify-between gap-2 my-2 px-2'>
                                 
@@ -166,8 +166,12 @@ export default function page() {
 
             <dialog ref={modalRef} className="modal">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
+                    <h3 className="font-bold text-3xl text-cnter">
+                          ✅
+                    </h3>
+                    <p className="py-4 text-center">
+                        Category Added Successfully
+                    </p>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}

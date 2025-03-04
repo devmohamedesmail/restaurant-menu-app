@@ -85,27 +85,29 @@ useEffect(()=>{
   return (
    <div>
      <div className='container m-auto px-5'>
-      
-      {meals && meals.length > 0 ? (
-              <div className='grid grid-cols-2 my-10 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-                {meals.map((meal) => (
-                  <MealItem 
-                    key={meal._id} 
-                    title={meal.title} 
-                    description={meal.description} 
-                    image={meal.image} 
-                    price={meal.price}
-                    quantity={quantities[meal._id] || 1}
-                    quantityIncrement={() => handleIncrement(meal._id)}
-                    quantityDecrement={() => handleDecrement(meal._id)}
-                    addtocart={() => handleAddToCart(meal)}
-                    />
-                ))}
-              </div>
-            ) : (<CustomSpinner />)}
 
-
-      
+      {meals ? (
+        <>
+        {meals && meals.length > 0 ? (
+           <div className='grid grid-cols-2 my-10 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+           {meals.map((meal) => (
+             <MealItem 
+               key={meal._id} 
+               title={meal.title} 
+               description={meal.description} 
+               image={meal.image} 
+               price={meal.price}
+               quantity={quantities[meal._id] || 1}
+               quantityIncrement={() => handleIncrement(meal._id)}
+               quantityDecrement={() => handleDecrement(meal._id)}
+               addtocart={() => handleAddToCart(meal)}
+               />
+           ))}
+         </div>
+        ):(<h1 className='text-2xl text-center text-white font-bold my-40'>No Meals Found</h1>)}
+        </>
+        
+        ):(<CustomSpinner />)} 
     </div>
     <BottomNavbar />
    </div>
