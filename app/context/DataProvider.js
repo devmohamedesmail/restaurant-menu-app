@@ -14,9 +14,10 @@ export const DataProvider = ({ children }) => {
     const [meals, setMeals] = useState([])
     const [offers, setOffers] = useState([])
     const [tableNo, setTableNo] = useState(0);
+    const [setting,setSetting]=useState();
 
 
-console.log(tableNo);
+
 
     // *************************************** fetch categories start *******************************************
     const fetchCategories = async () => {
@@ -79,6 +80,25 @@ console.log(tableNo);
 
 
 
+    // *************************************** fetch setting start *******************************************
+
+    const fetchSetting = async () => {
+        try {
+            const response = await axios.get('/api/setting',{
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                }
+            });
+            setSetting(response.data);
+           
+        } catch (error) {
+            console.log("Error Fetching offers", error);
+        }
+    }
+    // *************************************** fetch setting End *******************************************
+
 
 
 
@@ -88,6 +108,7 @@ console.log(tableNo);
         fetchCategories();
         fetchMeals();
         fetchOffers();
+        fetchSetting();
     }, []);
 
 
@@ -96,7 +117,7 @@ console.log(tableNo);
     return (
         <DataContext.Provider 
             value=
-            {{ categories, fetchCategories, meals, fetchMeals, offers, fetchOffers,tableNo,setTableNo }}>
+            {{ categories, fetchCategories, meals, fetchMeals, offers, fetchOffers,tableNo,setTableNo,setting }}>
             {children}
         </DataContext.Provider>
     )

@@ -2,6 +2,8 @@
 import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { MdOutlineShoppingCart } from "react-icons/md";
+
 
 export default function BottomNavbar() {
 
@@ -21,13 +23,13 @@ export default function BottomNavbar() {
 
 
 
-        <Link href='/pages/front/cart' className='flex flex-col items-center  justify-center flex-2'>
+        <Link href='/pages/front/cart' className='flex flex-col items-center  justify-center flex-2 bg-amber-600 rounded-4xl'>
           <div className='relative flex flex-col items-center  justify-center'>
-            <img src="/images/cart.svg" className='w-8 h-8' alt="" />
-            <h3 className='text-white text-sm absolute -top-3 -right-3 bg-amber-600 rounded-full w-6 h-6 flex justify-center items-center'>{cart.length}</h3>
+            {/* <img src="/images/cart.svg" className='w-8 h-8' alt="" /> */}
+            <MdOutlineShoppingCart color='white' size={30} />
+            <h3 className='text-white text-sm absolute -top-3 -right-3 bg-black rounded-full w-6 h-6 flex justify-center items-center'>{cart.length}</h3>
             <h3 className='text-white text-sm'> {totalPrice} </h3>
           </div>
-
         </Link>
 
 

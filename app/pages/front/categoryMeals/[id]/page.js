@@ -6,6 +6,8 @@ import CustomSpinner from '@/app/customcomponents/CustomSpinner';
 import MealItem from '@/app/components/Meals/MealItem';
 import { useDispatch } from 'react-redux';
 import { add_to_cart } from '@/app/redux/cartReducer';
+import BackBtn from '@/app/components/BackBtn/BackBtn';
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 export default function page() {
 const {id}=useParams();
@@ -84,6 +86,15 @@ useEffect(()=>{
 
   return (
    <div>
+
+
+
+      <div className='container m-auto'>
+       <BackBtn />
+      </div>
+
+
+
      <div className='container m-auto px-5'>
 
       {meals ? (
@@ -101,6 +112,7 @@ useEffect(()=>{
                quantityIncrement={() => handleIncrement(meal._id)}
                quantityDecrement={() => handleDecrement(meal._id)}
                addtocart={() => handleAddToCart(meal)}
+               icon={<MdOutlineAddShoppingCart />}
                />
            ))}
          </div>
