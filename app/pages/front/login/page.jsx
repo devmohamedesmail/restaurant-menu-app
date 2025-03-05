@@ -39,7 +39,7 @@ export default function page() {
       <div className='container m-auto'>
 
 
-        <div className='h-screen flex justify-center items-center'>
+        <div className='mt-30 flex justify-center items-center'>
 
           <div className='w-full lg:w-1/3  mx-2 bg-black rounded-4xl py-10 px-5 relative overflow-hidden'>
 
