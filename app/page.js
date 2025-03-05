@@ -5,7 +5,7 @@ import Meals from "./components/Meals/Meals";
 import BottomNavbar from "./components/BottomNavbar/BottomNavbar";
 import Banner from "./components/Banner/Banner";
 import Header from "./components/Header/Header";
-import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher";
+import TopHeader from "./components/TopHeader/TopHeader";
 
 
 export default function Home() {
@@ -13,8 +13,8 @@ export default function Home() {
 
   return (
     <div>
-
-      <LanguageSwitcher />
+      <TopHeader />
+      
       <Header />
       <Categories />
       <Banner />

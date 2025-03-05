@@ -15,6 +15,14 @@
   "Total": " المجموع ",
   "Order": " الطلب ",
   "Order Now": " اطلب الان ",
-  "Order Details": " تفاصيل الطلب "
+  "Order Details": " تفاصيل الطلب ",
+  "Email":" البريد الالكتروني ",
+  "Password":" كلمة المرور ",
+  "Login Now":" تسجيل الدخول الان ",
+  "Don't have an account?":" لا تملك حساب؟",
+  "Register Now":" التسجيل الان ",
+  "Name":" الاسم ",
+  "Already have an account?":" تملك حساب بالفعل؟",
+  "Back to Login":" العودة لتسجيل الدخول"
  
 }

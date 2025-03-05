@@ -11,6 +11,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.0",
     "axios": "^1.8.1",
+    "bcryptjs": "^3.0.2",
+    "encrypt": "^0.0.1",
     "filestack-js": "^3.38.5",
     "formidable": "^3.5.2",
     "fs-extra": "^11.3.0",

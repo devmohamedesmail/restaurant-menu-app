@@ -16,7 +16,15 @@
    "Order":"Order",
    "Order Now":"Order Now",
    "Order Details":"Order Details",
-   "Order ID":"Order ID"
+   "Order ID":"Order ID",
+   "Email":"Email",
+   "Password":"Password",
+   "Login Now":"Login Now",
+   "Don't have an account?":"Don't have an account?",
+   "Register Now":"Register Now",
+   "Name":"Name",
+   "Already have an account?":"Already have an account?",
+   "Back to Login":"Back to Login"
   
   
   }
